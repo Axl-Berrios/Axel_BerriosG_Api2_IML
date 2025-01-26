@@ -41,30 +41,6 @@ El código realiza las siguientes operaciones para manejar los valores faltantes
    print(train_df.isnull().sum())
    print(test_df.isnull().sum())
 
-train_df['Age'].fillna(train_df['Age'].mean(), inplace=True)
-test_df['Age'].fillna(test_df['Age'].mean(), inplace=True)
-
-train_df['Embarked'].fillna('S', inplace=True)
-test_df['Embarked'].fillna('S', inplace=True)
-
-train_df['Cabin'].fillna('Unknown', inplace=True)
-test_df['Cabin'].fillna('Unknown', inplace=True)
-
-fare_mean = test_df['Fare'].mean()
-test_df['Fare'].fillna(fare_mean, inplace=True)
-
-train_df['Sex'].replace(['female', 'male'], [0, 1], inplace=True)
-train_df['Embarked'].replace(['C', 'Q', 'S'], [0, 1, 2], inplace=True)
-
-train_df = train_df.loc[:, ['Sex', 'Pclass', 'Age', 'Embarked', 'Survived']]
-test_df = test_df.loc[:, ['Sex', 'Pclass', 'Age', 'Embarked']]
-
-
-from sklearn.model_selection import train_test_split
-X = np.array(train_df.drop(['Survived'], 1))
-y = np.array(train_df['Survived'])
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3)
-
 from sklearn.model_selection import train_test_split
 X = np.array(train_df.drop(['Survived'], 1))
 y = np.array(train_df['Survived'])
